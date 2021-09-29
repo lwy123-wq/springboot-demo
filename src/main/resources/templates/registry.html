@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <link href="css/element/index.css" rel="stylesheet">
-    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+
     <script>
         function registry(){
             $.ajax({
@@ -14,7 +14,7 @@
                 success: function (res) {
                     if(res == "Y"){
                         function login(){
-                            window.location.href='login.html'
+                            window.location.href='login'
                         }
                         login()
 
@@ -33,7 +33,7 @@
         body{
             margin: 0;
             padding: 0;
-            background-image: url("static/img/registry.jpg");
+            background-image: url("../static/img/registry.jpg");
             background-repeat: no-repeat;
             background-size:100%;
             background-position: 0px -50px;
@@ -96,6 +96,7 @@
     </style>
 </head>
 <body>
+<!--<img src="../static/img/registry.jpg">-->
 <form id="form1" class="box" onsubmit="return false" action="##" method="post">
 <div id = center>
 用户名<input id="username" type="text"/>

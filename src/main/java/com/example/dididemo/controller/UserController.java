@@ -36,17 +36,13 @@ public class UserController {
             return "success";
         }
     }
-/*    @RequestMapping(value = "/registry")
-    public ModelAndView register(){
-        return new ModelAndView("/registry.html");
-    }*/
     @RequestMapping(value = "/registry", method = RequestMethod.GET)
     public String start(){
         return "registry";
     }
     @PostMapping(value = "/registrys")
     @ResponseBody
-    public String  register(String username,String password,String id){
+    public String  register(String username,String password){
         System.out.println("duan dian 1");
         User user =userService.findByName(username);
         System.out.println(user.getUsername());
@@ -57,17 +53,7 @@ public class UserController {
         }
         return "N";
     }
-    //去注册页面
-  /*  @GetMapping("/register")
-    public String toRegister(){
-        return "register";
-    }*/
 
-    @RequestMapping("/demo")
-    public String demo1(){return "/demo.html";}
-
-    //去登陆页面
-//    @GetMapping("/logins")
 
 
 

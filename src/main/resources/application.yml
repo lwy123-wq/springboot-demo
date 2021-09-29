@@ -1,6 +1,8 @@
 server:
-  port: 9998
+  port: 9998    #当前应用运行端口号
 spring:
+  mvc:
+    static-path-pattern=/static/**:
   datasource:
     url: jdbc:mysql://localhost:3306/aaa
     username: root
