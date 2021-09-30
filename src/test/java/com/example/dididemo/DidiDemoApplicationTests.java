@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class DidiDemoApplicationTests {
-    @Autowired
-    private UserDao userDao;
+   /* @Autowired
+    private UserDao userDao;*/
     @Test
     void test() {
-       userDao.create("aa","111");
+       //userDao.create("aa","111");
 
     }
 
