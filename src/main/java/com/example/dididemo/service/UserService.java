@@ -32,9 +32,5 @@ public interface UserService {
     *//**
     *创建一个新表
     */
-   /* void createName(String name);
 
-    User findByName(String name);
-
-    User findByNameAndPassword(String name, String password);*/
 }
