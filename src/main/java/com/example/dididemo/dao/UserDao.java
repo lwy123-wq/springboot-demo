@@ -10,13 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/*public interface UserDao extends JpaRepository<User,Integer> {
-    @Query(value = "select * from  user where username=:username and password=:password",nativeQuery = true)
-    User findByNameAndPassword( String username, String password);
-    //@Query(value = "insert into user(username, password) values(username=:username and password=:password)",nativeQuery = true;)
-    //String create(User u);
-
-}*/
 @Repository
 public class UserDao implements UserService {
     @Autowired
