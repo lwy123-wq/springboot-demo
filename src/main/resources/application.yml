@@ -1,5 +1,5 @@
 server:
-  port: 9998    #当前应用运行端口号
+  port: 28888    #当前应用运行端口号
 spring:
   mvc:
     static-path-pattern=/static/**:
