@@ -48,7 +48,7 @@ public class AddressedInterceptor  implements HandlerInterceptor {
         if (ip.equals("0:0:0:0:0:0:0:1")){
             ip = "";//如果本机地址，ip设为空
         }
-        String url = "https://api.map.baidu.com/location/ip?ip=" + ip + "&ak=G5HoLoRll9Gugi1sa8ceGASeozGQebnl&coor=bd09ll";
+        String url = "https://apis.map.qq.com/ws/location/v1/ip?" + ip + "&key=OBOBZ-PMZCW-QAORR-ROKDN-6UV2Q-TIBN4";
         JSONObject jsonObject = readJsonFromUrl(url);
         System.out.println(jsonObject.toString());
         String place = (String) ((JSONObject) jsonObject.get("content")).get("address");
