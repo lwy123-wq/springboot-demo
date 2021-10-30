@@ -3,8 +3,10 @@ package com.example.dididemo.picture;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.example.dididemo.config.IpUtil;
+import com.example.dididemo.service.AddressServiceImpl;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -15,96 +17,80 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Map;
 
-@Component
+@Configuration
 public class AddressedInterceptor  implements HandlerInterceptor {
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
-
-    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-        InputStream is = new URL(url).openStream();
+    @Autowired
+    private AddressServiceImpl addressService;
+    public static String sendGet(String ip) {
+        String result = "";
+        BufferedReader in = null;
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(Boolean.parseBoolean(jsonText));
-            return json;
-        } finally {
-            is.close();
-            // System.out.println("同时 从这里也能看出 即便return了，仍然会执行finally的！");
+            String urlNameString = "https://apis.map.qq.com/ws/location/v1/ip?ip="+ip+"&key=KNWBZ-UUG6I-DNWGU-5KEWN-S3REZ-VUBWX";
+            URL realUrl = new URL(urlNameString);
+
+            URLConnection connection = realUrl.openConnection();
+
+            connection.setRequestProperty("accept", "*/*");
+            connection.setRequestProperty("connection", "Keep-Alive");
+            connection.setRequestProperty("user-agent",
+                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            // 建立实际的连接
+            connection.connect();
+            // 获取所有响应头字段
+            Map<String, List<String>> map = connection.getHeaderFields();
+
+            in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+        } catch (Exception e) {
+            System.out.println("发送GET请求出现异常！" + e);
+            e.printStackTrace();
         }
+        // 使用finally块来关闭输入流
+        finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = IpUtil.getIpAddr(request);
-        if (ip.equals("0:0:0:0:0:0:0:1")){
-            ip = "";//如果本机地址，ip设为空
+        String s = sendGet(ip);
+        Map map = JSONObject.parseObject(s, Map.class);
+        String message = (String) map.get("message");
+        if("query ok".equals(message)){
+            Map result = (Map) map.get("result");
+            Map addressInfo = (Map) result.get("ad_info");
+            String nation = (String) addressInfo.get("nation");
+            String province = (String) addressInfo.get("province");
+            //  String district = (String) addressInfo.get("district");
+            String city = (String) addressInfo.get("city");
+            String address = nation + "-" + province + "-" + city;
+            addressService.Address(address);
+        }else if (message.equals("局域网IP无法定位")){
+            String addr="天津\n";
+            addressService.Address(addr);
+            System.out.println("办公区域/局域网区域"+addr);
         }
-        String url = "https://apis.map.qq.com/ws/location/v1/ip?" + ip + "&key=OBOBZ-PMZCW-QAORR-ROKDN-6UV2Q-TIBN4";
-        JSONObject jsonObject = readJsonFromUrl(url);
-        System.out.println(jsonObject.toString());
-        String place = (String) ((JSONObject) jsonObject.get("content")).get("address");
-        System.out.println(place);
+
         return true;
     }
-    /*@Autowired
-    private RestTemplate restTemplate;
-
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String ipAddress = null;
-        ipAddress = request.getHeader("x-forwarded-for");
-        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("Proxy-Client-IP");
-        }
-        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("WL-Proxy-Client-IP");
-            }
-        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getRemoteAddr();
-            if (ipAddress.equals("127.0.0.1")) {
-                    // 根据网卡取本机配置的IP
-                InetAddress inet = null;
-                try {
-                    inet = InetAddress.getLocalHost();
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
-                }
-                ipAddress = inet.getHostAddress();
-                System.out.println(ipAddress+"ssssssssssssss");
-                }
-            }
-            // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-        if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
-                // = 15
-            if (ipAddress.indexOf(",") > 0) {
-                ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
-            }
-        }
-        String sina = restTemplate.getForObject("https://api.map.baidu.com/location/ip?ak=G5HoLoRll9Gugi1sa8ceGASeozGQebnl&ip={ipAddress}&coor=bd09ll ", String.class,ipAddress);
-        SinaIpVo sinaIpVo = new Gson().fromJson(sina, SinaIpVo.class);
-//        if(sinaIpVo.getRet()!=-1){
-            System.out.println(sinaIpVo.getProvince());
-            System.out.println(sinaIpVo.getCity());
-        *//*else{
-            String object = restTemplate.getForObject("http://ip.taobao.com/service/getIpInfo.php?ip={ip}", String.class,ip);
-            IpVo ipVo = new Gson().fromJson(object, IpVo.class);
-            // XX表示内网
-            if(ipVo.getCode()==0 && !ipVo.getAddress().getRegion().equals("XX")){
-                System.out.println(ipVo.getAddress().getRegion());
-                System.out.println(ipVo.getAddress().getCity());
-            }
-        }*//*
-        return true;
-    }*/
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
