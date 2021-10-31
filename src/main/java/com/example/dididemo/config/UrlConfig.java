@@ -12,7 +12,7 @@ public class UrlConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //addResourceHandler是指你想在url请求的路径
         //addResourceLocations是图片存放的真实路径
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+       /* registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");*/
     }
 }
 
