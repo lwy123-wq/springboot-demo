@@ -12,8 +12,8 @@
             formData.append("file", file);
             // formData.append("id_token", id_token);
             $.ajax({
-                url: "${path }/user/uploadESignatureImg",
-                type: "post",
+                url: "/uploadESignatureImg",
+                type: "POST",
                 data: formData,
                 dataType: "json",
                 // cache: false,//上传文件无需缓存
@@ -30,7 +30,9 @@
 </head>
 <body>
 <form id="form1" enctype="multipart/form-data">
-    <input type="file" id="file" name="imgfile" onchange="uploadpic()">
+    <input type="file" id="file" name="imgfile" >
+    <input id="submit" type="submit" value="提交" onclick="uploadpic()"/>
+<!--    <button onclick="uploadpic()"/>-->
     <input type="hidden" name="dianziQianming" id="dianziqianmingPath"/>
 </form>
 </body>
