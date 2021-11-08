@@ -78,7 +78,7 @@
         WS:{},
         init: function () {
             if (window.WebSocket) {
-                this.WS = new WebSocket("ws://A156B7L58CCNY4B:8090/ws");
+                this.WS = new WebSocket("ws://localhost:8090/ws");
                 this.WS.onmessage = function(event) {
                     var data = event.data;
                     console.log("收到数据:" + data);

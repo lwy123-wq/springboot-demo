@@ -31,11 +31,11 @@ public class JobServerInitializer extends ChannelInitializer<SocketChannel> {
                 // webSocket 数据压缩扩展，当添加这个的时候WebSocketServerProtocolHandler的第三个参数需要设置成true
                 .addLast(new WebSocketServerCompressionHandler())
                 // 服务器端向外暴露的 web socket 端点，当客户端传递比较大的对象时，maxFrameSize参数的值需要调大
-                .addLast(new WebSocketServerProtocolHandler("/chat", null, true, 10485760))
+                .addLast(new WebSocketServerProtocolHandler("/ws", null, true, 10485760))
                 // 自定义处理器 - 处理 web socket 文本消息
                 //TODO
-                .addLast(null)
+                .addLast(new ChatHandler());
                 //自定义handler,处理业务逻辑
-                .addLast(null);
+
     }
 }

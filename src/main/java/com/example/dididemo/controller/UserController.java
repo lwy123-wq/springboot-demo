@@ -72,6 +72,11 @@ public class UserController {
     public String picture() {
         return "picture";
     }
+
+    @RequestMapping(value = "/chat", method = RequestMethod.GET)
+    public String chat() {
+        return "chat";
+    }
 }
 
 

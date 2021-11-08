@@ -31,7 +31,7 @@ public class JobChatServer {
                     .childHandler((ChannelHandler) new JobServerInitializer());
 
             //启动服务器
-            ChannelFuture channelFuture = serverBootstrap.bind(28888).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(8090).sync();
             channelFuture.channel().closeFuture().sync();
 
         } finally {
