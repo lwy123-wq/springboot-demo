@@ -1,4 +1,4 @@
-package com.example.dididemo.chat;
+package com.example.dididemo.singlechat;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;

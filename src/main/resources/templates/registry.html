@@ -11,7 +11,10 @@
                 url: "/registrys",
                 type: 'POST',
                 data: {'username': $("#username").val(), 'password': $("#password").val()},
-                success: function (res) {
+                xhrFields: {
+                    withCredentials: true
+                },
+                    success: function (res) {
                     if(res == "Y"){
                         function login(){
                             window.location.href='login'

@@ -3,8 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script>
+        function login(){
+            $.ajax({
+                url: "/loginn",
+                type: 'POST',
+                data: {'username': $("#username").val(), 'password': $("#password").val()},
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function (res) {
+                    if(res == "success"){
+                        function login(){
+                            window.location.href='register'
+                        }
+                        login()
+
+                    }else{
+                        alert("error")
+                    }
+                },
+                error: function (res) {
+                    alert("error!!!!!")
+                }
+            });
+        }
+
+    </script>
 </head>
 <body>
-lxjlxjshigedashabi
+<form id="form1" class="box" onsubmit="return false" action="##" method="post">
+    <div id = center>
+        用户名<input id="username" type="text"/>
+        密码<input id="password" type="password"/>
+        <input id="submit" type="submit" value="提交" onclick="login()"/>
+    </div>
+</form>
 </body>
 </html>

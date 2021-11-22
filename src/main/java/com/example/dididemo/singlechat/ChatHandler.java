@@ -1,4 +1,4 @@
-package com.example.dididemo.chat;
+package com.example.dididemo.singlechat;
 
 import com.example.dididemo.entity.UserMap;
 import io.netty.buffer.Unpooled;

@@ -1,4 +1,4 @@
-package com.example.dididemo.chat;
+package com.example.dididemo.singlechat;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

@@ -5,10 +5,13 @@ import com.example.dididemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserDao implements UserService {
@@ -39,10 +42,25 @@ public class UserDao implements UserService {
         jdbcTemplate.query(sql, new Object[]{username, password}, new RowCallbackHandler() {
             @Override
             public void processRow(ResultSet resultSet) throws SQLException {
-                user.setUsername(resultSet.getString(1));
-                user.setPassword(resultSet.getString(2));
+                user.setUsername(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
             }
         });
         return user;
+    }
+
+    public List<User> aa() {
+        String sql = "select * from user";
+        List list =jdbcTemplate.query(sql, new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                return user;
+            }
+        });
+
+        return list;
     }
 }
