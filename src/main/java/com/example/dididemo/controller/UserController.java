@@ -98,7 +98,11 @@ public class UserController {
         return "chat";
     }
 
-
+    @RequestMapping("")
+    @ResponseBody
+    public String aa(@RequestParam("name") String name){
+        return name;
+    }
 }
 
 
