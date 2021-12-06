@@ -18,12 +18,6 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    /*@RequestMapping("/")
-    public String index() {
-        return "index";
-    }*/
-
-
     @RequestMapping(value = "/login")
     public String login() {
         return "/login.html";
