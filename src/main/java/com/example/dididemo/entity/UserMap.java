@@ -1,10 +1,12 @@
 package com.example.dididemo.entity;
 
 import io.netty.channel.Channel;
-
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * cookies
+* */
 public class UserMap {
     private HashMap<String, Channel> users = new HashMap();
     private static UserMap instance;
