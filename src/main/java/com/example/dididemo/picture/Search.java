@@ -10,7 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
-//ip
+
 public class Search {
     static String MYAK = "G5HoLoRll9Gugi1sa8ceGASeozGQebnl"; // 百度地图密钥
 
