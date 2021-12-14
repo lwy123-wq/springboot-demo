@@ -23,12 +23,12 @@ public interface UserService {
      * 根据name删除一个用户高
      * @param username
      */
-    void deleteByName(String username);
+    //void deleteByName(String username);
 
     /**
      * 获取用户总量
      */
-    Integer getAllUsers();
+    //Integer getAllUsers();
     /**
     *创建一个新表
     */

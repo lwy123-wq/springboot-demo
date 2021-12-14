@@ -88,9 +88,6 @@ public class ChatHandler extends SimpleChannelInboundHandler {
 
             //发送消息给所有客户端  群聊
             //channels.writeAndFlush(new TextWebSocketFrame(msg));
-
-
-
             // 邦定user和channel
             // 定义每个上线用户主动发送初始化信息过来,携带自己的name,然后完成绑定  模型  init:[usrname]
             // 实际场景中应该使用user唯一id
@@ -101,7 +98,6 @@ public class ChatHandler extends SimpleChannelInboundHandler {
                     ctx.channel().writeAndFlush(new TextWebSocketFrame("success"));
                 }
             }
-
 
             //搜索在线用户      消息模型  search:[username]
             if (message.indexOf("search") != -1) {
