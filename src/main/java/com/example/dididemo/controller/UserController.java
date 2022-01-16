@@ -23,6 +23,11 @@ public class UserController {
         return "/login.html";
     }
 
+    @RequestMapping(value = "/aaa")
+    public String index() {
+        return "/index";
+    }
+
     @PostMapping(value = "/loginn")
     @ResponseBody
     public String login(HttpServletRequest request, HttpServletResponse response, String username, String password, Model model) {
