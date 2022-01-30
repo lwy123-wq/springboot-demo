@@ -8,9 +8,7 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.example.dididemo.config.PropertiesConfig;
 import com.example.dididemo.entity.AlipayBean;
 
-/**
- * aa
- */
+
 public class AlipayUtil {
     public static String connect(AlipayBean alipayBean) throws AlipayApiException {
         //1、获得初始化的AlipayClient
