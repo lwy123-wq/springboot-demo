@@ -28,7 +28,7 @@ public class PropertiesConfig implements ApplicationListener {
             this.init(aliPropertiesMap);//应用启动加载
         }
     }
-    /*初始化加载aliPropertiesMap*/
+   /* 初始化加载aliPropertiesMap*/
     public void init(Map<String, String> map) {
         // 获得PathMatchingResourcePatternResolver对象
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
