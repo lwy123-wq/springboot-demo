@@ -79,13 +79,14 @@ public class UserController {
     }
 
 
-    /*@ResponseBody
+    @ResponseBody
     @PostMapping("/uploadESignatureImg")
     public void uploadESignatureImg(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
-        *//*String filePath = uploadESignature(file);
+        /*String filePath = uploadESignature(file);
 
-        return renderSuccess(filePath);*//*
-    }*/
+        return renderSuccess(filePath);*/
+    }
+    //图片
     @RequestMapping(value = "/picture", method = RequestMethod.GET)
     public String picture() {
         return "picture";
