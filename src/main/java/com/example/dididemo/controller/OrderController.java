@@ -1,6 +1,5 @@
 package com.example.dididemo.controller;
 
-
 import com.alipay.api.AlipayApiException;
 import com.example.dididemo.entity.AlipayBean;
 import com.example.dididemo.service.PayService;
