@@ -10,7 +10,7 @@ public class FilterConfig {
     /**
      * 配置跨域访问的过滤器
      * @return
-     */
+    */
     @Bean
     public FilterRegistrationBean registerFilter(){
         FilterRegistrationBean bean = new FilterRegistrationBean();
