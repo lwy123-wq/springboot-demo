@@ -28,7 +28,7 @@ public class Picture {
         this.detail = detail;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "ResultBean{" +
                 "area='" + area + '\'' +
@@ -41,7 +41,7 @@ public class Picture {
                 ", location='" + location + '\'' +
                 ", detail='" + detail + '\'' +
                 '}';
-    }
+    }*/
 
     public String getArea() {
         return area;
