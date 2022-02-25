@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 
 public class IpUtil {
     private static final String LOCAL_IP = "127.0.0.1";
+    //ip
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";
