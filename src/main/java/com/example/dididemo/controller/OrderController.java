@@ -13,10 +13,12 @@ import javax.annotation.Resource;
 @RestController()
 @RequestMapping("order")
 public class OrderController {
-
+    //调用支付服务
     @Resource
-    private PayService payService;//调用支付服务
+    private PayService payService;
+
     /*阿里支付*/
+
     /*@PostMapping(value = "alipay")
     public String alipay(String out_trade_no,String subject,String total_amount,String body) throws AlipayApiException {
         return  payService.aliPay(new AlipayBean()
