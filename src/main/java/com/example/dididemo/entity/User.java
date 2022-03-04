@@ -5,7 +5,8 @@ public class User {
     private String username;
     private String password;
 
-    //private int code; //验证码
+    //private int code;
+    // 验证码
 
     public User() {
     }
