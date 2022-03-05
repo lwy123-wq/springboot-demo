@@ -4,8 +4,8 @@ public class User1 {
     private long id;  // id
     private String name;  // 姓名
     private double lat;  // 纬度
-    private double lon;  // 经度
-    private double[] location;// hashcode
+    private double lon;    // 经度
+    private double[] location;  // hashcode
 
     public User1(long id, String name, double lat, double lon) {
         super();
