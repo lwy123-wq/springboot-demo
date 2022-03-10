@@ -43,6 +43,7 @@ public class UserController {
     }
     @RequestMapping("/index")
     public String mainPage(HttpServletRequest request, Model model){
+
         // 判断cookie是否存在，如存在则利用cookie登录，否则返回登录界面
         Map<String, String> map = CookieUtil.getCookies(request);
         String username = map.get("username");
