@@ -21,7 +21,6 @@ public class UserDao implements UserService {
     public int create(String username,String password) {
         return jdbcTemplate.update("insert into user(username,password)values (?,?)",username,password);
     }
-    //
     public User findByName(String name) {
         final User user = new User();
         String sql = "SELECT username FROM user WHERE username=?";
